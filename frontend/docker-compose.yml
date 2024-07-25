@@ -1,0 +1,15 @@
+services:
+  frontend:
+    image: node:alpine
+    container_name: frontend
+    build: ./
+    stdin_open: true
+    tty: true
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      - HOST=0.0.0.0
+      - CHOKIDAR_USEPOLLING=true

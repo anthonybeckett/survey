@@ -10,3 +10,17 @@ To get started, change into the api folder start Sail which will start all conta
 ```Bash
     ./vendor/bin/sail up -d
 ```
+
+### Todo
+
+- [ ] Add makefile or something to run npm commands directly on docker container to avoid rebuilding or manually going into the container.
+- [ ] Set up a testing database for Pest in the API
+- [ ] Add more details on set up in this file
+- [ ] Add laravel packages such as Actions, Spatie Data
+- [ ] Set up an API endpoint instead of using direct access to port 8000
+- [ ] Add tailwind to frontend
+- [ ] Create auth forms to login, register and logout
+- [ ] Create survey pages
+- [ ] Add questions
+- [ ] Create a dashboard style page
+- [ ] Update frontend docker to be able to run in production using nginx

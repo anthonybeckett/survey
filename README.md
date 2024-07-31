@@ -19,7 +19,9 @@ To get started, change into the api folder start Sail which will start all conta
 - [ ] Add laravel packages such as Actions, Spatie Data
 - [ ] Set up an API endpoint instead of using direct access to port 8000
 - [x] ~~Add tailwind to frontend~~
-- [ ] Create auth forms to login, register and logout
+- [x] ~~Create auth forms to login, register and logout~~
+- [ ] Create auth system with sanctum
+- [ ] Create forgot password function on login page
 - [ ] Create survey pages
 - [ ] Add questions
 - [ ] Create a dashboard style page

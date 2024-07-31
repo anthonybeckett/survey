@@ -6,9 +6,10 @@
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form class="space-y-6" action="#" method="POST">
+        <form class="space-y-6" @submit="register">
             <div>
                 <v-text-field
+                    v-model="user.name"
                     label="Full name"
                     name="name"
                     type="text"
@@ -19,6 +20,7 @@
 
             <div>
                 <v-text-field
+                    v-model="user.email"
                     label="Email"
                     name="email"
                     type="email"
@@ -30,6 +32,7 @@
             <div>
                 <div class="mt-2">
                     <v-text-field
+                        v-model="user.password"
                         label="Password"
                         name="password"
                         type="password"
@@ -40,8 +43,9 @@
 
                 <div class="mt-2">
                     <v-text-field
+                        v-model="user.passwordConfirmation"
                         label="Password Confirmation"
-                        name="password-confirmation"
+                        name="password_confirmation"
                         type="password"
                         variant="outlined"
                         required
@@ -50,7 +54,7 @@
             </div>
 
             <div>
-                <v-btn color="primary">Register</v-btn>
+                <v-btn color="primary" type="submit">Register</v-btn>
             </div>
         </form>
 
@@ -61,6 +65,31 @@
     </div>
 </template>
 
-<script setup>
+<script>
+    import store from "@/store";
+    import {useRouter} from "vue-router";
 
+    const router = useRouter();
+
+    export default {
+        data: () => ({
+            user: {
+                name: '',
+                email: '',
+                password: '',
+                passwordConfirmation: '',
+            },
+        }),
+        methods: {
+            async register(event) {
+                event.preventDefault();
+
+                let userRegistered = await store.dispatch('register', this.user);
+
+                console.log(userRegistered);
+
+                await router.push({ name: 'Dashboard' });
+            }
+        }
+    }
 </script>

@@ -65,31 +65,27 @@
     </div>
 </template>
 
-<script>
+<script setup>
     import store from "@/store";
-    import {useRouter} from "vue-router";
+    import { useRouter } from "vue-router";
+    import { ref } from "vue";
 
     const router = useRouter();
 
-    export default {
-        data: () => ({
-            user: {
-                name: '',
-                email: '',
-                password: '',
-                passwordConfirmation: '',
-            },
-        }),
-        methods: {
-            async register(event) {
-                event.preventDefault();
+    const user = ref({
+        name: '',
+        email: '',
+        password: '',
+        passwordConfirmation: '',
+    });
 
-                let userRegistered = await store.dispatch('register', this.user);
+    async function register(event) {
+        event.preventDefault();
 
-                console.log(userRegistered);
+        let userRegistered = await store.dispatch('register', user);
 
-                await router.push({ name: 'Dashboard' });
-            }
-        }
+        console.log(userRegistered);
+
+        await router.push({ name: 'Dashboard' });
     }
 </script>

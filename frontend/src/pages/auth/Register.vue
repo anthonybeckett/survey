@@ -84,8 +84,6 @@
 
         let userRegistered = await store.dispatch('register', user);
 
-        console.log(userRegistered);
-
         await router.push({ name: 'Dashboard' });
     }
 </script>

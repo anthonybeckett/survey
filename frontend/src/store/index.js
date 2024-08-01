@@ -1,4 +1,5 @@
 import {createStore} from "vuex";
+import axiosClient from "@/api/axios";
 
 const store = createStore({
     state: {
@@ -9,20 +10,37 @@ const store = createStore({
     },
     getters: {},
     actions: {
-        register({ commit }, user) {
-            return fetch(`http://localhost:8000/api/register`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json"
-                },
-                method: 'POST',
-                body: JSON.stringify(user)
-            })
-                .then(res => res.json())
-                .then(res => {
-                    commit("setUser", res);
-                    return res;
-                });
+        async register({ commit }, user) {
+
+            try {
+                const response = await axiosClient.post('/register', user);
+
+                if (response.data) {
+                    return null;
+                }
+
+                commit('setUser', response.data);
+
+                return response.data;
+            } catch (e) {
+                console.log(e);
+            }
+        },
+        async login({ commit }, user) {
+            try {
+                const response = await axiosClient.post('/login', user);
+
+                if (response.data) {
+                    return null;
+                }
+
+                commit('setUser', response.data);
+
+                return response.data;
+            } catch (e) {
+                console.error(e);
+                throw e;
+            }
         },
     },
     mutations: {

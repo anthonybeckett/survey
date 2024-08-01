@@ -1,4 +1,24 @@
 <template>
+    <div class="h-25">
+        <v-alert
+            density="compact"
+            v-if="errorMessage"
+            type="error"
+            variant="outlined"
+        >
+            <div class="flex justify-between items-center">
+                <div>
+                    {{errorMessage}}
+                </div>
+
+                <div>
+                    <span  class="text-2xl cursor-pointer" @click="errorMessage = ''">&times;</span>
+                </div>
+            </div>
+        </v-alert>
+    </div>
+
+
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
         <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
              alt="Your Company">
@@ -7,9 +27,10 @@
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form class="space-y-6" action="#" method="POST">
+        <form class="space-y-3" @submit="login">
             <div>
                 <v-text-field
+                    v-model="user.email"
                     label="Email"
                     name="email"
                     type="email"
@@ -18,8 +39,9 @@
             </div>
 
             <div>
-                <div class="mt-2">
+                <div>
                     <v-text-field
+                        v-model="user.password"
                         label="Password"
                         name="password"
                         type="password"
@@ -35,7 +57,16 @@
             </div>
 
             <div>
-                <v-btn color="primary">Login</v-btn>
+                <v-checkbox
+                    v-model="user.remember"
+                    label="Remember Me"
+                    name="remember"
+                    type="text"
+                />
+            </div>
+
+            <div>
+                <v-btn color="primary" type="submit">Login</v-btn>
             </div>
         </form>
 
@@ -47,5 +78,30 @@
 </template>
 
 <script setup>
+    import {ref} from "vue";
+    import store from '@/store';
+    import {useRouter} from "vue-router";
 
+    const router = useRouter();
+
+    const user = ref({
+        email: '',
+        password: '',
+        remember: false
+    });
+
+    let errorMessage = ref('');
+
+    async function login(event) {
+        event.preventDefault();
+
+        try {
+            await store.dispatch('login', user);
+        } catch(e) {
+            console.log(e);
+            errorMessage.value = `${e.response.status} | ${e.message}`;
+        }
+
+        await router.push({ name: 'Dashboard' });
+    }
 </script>

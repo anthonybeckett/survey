@@ -13,8 +13,7 @@ To get started, change into the api folder start Sail which will start all conta
 
 ### Todo
 - [ ] Make alert its own component and style better
-- [ ] Fix CSRF issues when sending requests to the API from the frontend
-- [ ] Refactor login and register functions in store to an auth domain action
+- [x] ~~Fix CSRF issues when sending requests to the API from the frontend~~
 
 
 - [ ] Add makefile or something to run npm commands directly on docker container to avoid rebuilding or manually going into the container.

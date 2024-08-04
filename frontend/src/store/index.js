@@ -11,7 +11,6 @@ const store = createStore({
     getters: {},
     actions: {
         async register({ commit }, user) {
-
             try {
                 await axiosClient.get('/sanctum/csrf-cookie');
 
@@ -25,7 +24,7 @@ const store = createStore({
 
                 return response.data;
             } catch (e) {
-                console.log(e);
+                console.error(e);
             }
         },
         async login({ commit }, user) {

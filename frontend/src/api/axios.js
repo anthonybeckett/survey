@@ -11,4 +11,7 @@ axiosClient.interceptors.request.use(config => {
     return config;
 });
 
+axiosClient.defaults.withCredentials = true;
+axiosClient.defaults.withXSRFToken = true;
+
 export default axiosClient;

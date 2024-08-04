@@ -13,6 +13,8 @@ const store = createStore({
         async register({ commit }, user) {
 
             try {
+                await axiosClient.get('/sanctum/csrf-cookie');
+
                 const response = await axiosClient.post('/register', user);
 
                 if (response.data) {
@@ -28,6 +30,8 @@ const store = createStore({
         },
         async login({ commit }, user) {
             try {
+                await axiosClient.get('/sanctum/csrf-cookie');
+
                 const response = await axiosClient.post('/login', user);
 
                 if (response.data) {

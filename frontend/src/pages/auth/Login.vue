@@ -79,13 +79,13 @@
         event.preventDefault();
 
         try {
-            await store.dispatch('login', user);
+            await store.dispatch('login', user.value);
+
+            await router.push({ name: 'Dashboard' });
         } catch(e) {
             console.log(e);
             errorMessage.value = `${e.response.status} | ${e.message}`;
         }
-
-        await router.push({ name: 'Dashboard' });
     }
 
     function closeMessage() {

@@ -12,7 +12,8 @@ To get started, change into the api folder start Sail which will start all conta
 ```
 
 ### Todo
-- [ ] Fix bug with ref not passing any parameters through from form 
+- [ ] Fix bug with password confirmation not being passed as right parameter to api  
+- [x] Fix bug with ref not passing any parameters through from form 
 - [x] Make alert its own component and style better
 - [x] ~~Fix CSRF issues when sending requests to the API from the frontend~~
 

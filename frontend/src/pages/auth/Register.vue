@@ -93,7 +93,7 @@
             await router.push({ name: 'Dashboard' });
         } catch(e) {
             console.log(e);
-            errorMessage.value = `${e.response.status} | ${e.message}`;
+            errorMessage.value = `${e.response.status} | ${e.response.data.message}`;
         }
     }
 

@@ -1,4 +1,6 @@
 <template>
+    <AlertMessage :error-message="errorMessage" @close-message="closeMessage" />
+
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
         <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
              alt="Your Company">
@@ -69,6 +71,7 @@
     import store from "@/store";
     import { useRouter } from "vue-router";
     import { ref } from "vue";
+    import AlertMessage from "@/components/AlertMessage.vue";
 
     const router = useRouter();
 
@@ -79,11 +82,22 @@
         passwordConfirmation: '',
     });
 
+    let errorMessage = ref('');
+
     async function register(event) {
         event.preventDefault();
 
-        let userRegistered = await store.dispatch('register', user);
+        try {
+            await store.dispatch('register', user);
+        } catch(e) {
+            console.log(e);
+            errorMessage.value = `${e.response.status} | ${e.message}`;
+        }
 
         await router.push({ name: 'Dashboard' });
+    }
+
+    function closeMessage() {
+        errorMessage.value = '';
     }
 </script>

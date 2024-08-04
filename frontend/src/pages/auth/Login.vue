@@ -1,23 +1,5 @@
 <template>
-    <div class="h-25">
-        <v-alert
-            density="compact"
-            v-if="errorMessage"
-            type="error"
-            variant="outlined"
-        >
-            <div class="flex justify-between items-center">
-                <div>
-                    {{errorMessage}}
-                </div>
-
-                <div>
-                    <span  class="text-2xl cursor-pointer" @click="errorMessage = ''">&times;</span>
-                </div>
-            </div>
-        </v-alert>
-    </div>
-
+    <AlertMessage :error-message="errorMessage" @close-message="closeMessage" />
 
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
         <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
@@ -81,6 +63,7 @@
     import {ref} from "vue";
     import store from '@/store';
     import {useRouter} from "vue-router";
+    import AlertMessage from "@/components/AlertMessage.vue";
 
     const router = useRouter();
 
@@ -103,5 +86,9 @@
         }
 
         await router.push({ name: 'Dashboard' });
+    }
+
+    function closeMessage() {
+        errorMessage.value = '';
     }
 </script>

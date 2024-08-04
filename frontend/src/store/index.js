@@ -25,6 +25,7 @@ const store = createStore({
                 return response.data;
             } catch (e) {
                 console.error(e);
+                throw e;
             }
         },
         async login({ commit }, user) {
